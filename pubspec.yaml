@@ -60,6 +60,7 @@ flutter:
   assets:
     - assets/blackbg_perfume/
     - assets/fonts/
+    - assets/landscape_perfume/
 
   fonts:
     - family: PlayfairDisplay

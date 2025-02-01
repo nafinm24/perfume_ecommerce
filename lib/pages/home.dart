@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:perfume_ecommerce/pages/my_drawer.dart';
 
-class Home extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final String backgroundImage;
-  const Home({super.key, required this.backgroundImage});
+  const HomePage({super.key, required this.backgroundImage});
 
   @override
-  HomeState createState() => HomeState();
+  HomePageState createState() => HomePageState();
 }
 
-class HomeState extends State<Home> {
+class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -18,6 +18,43 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Icon(Icons.menu_open_sharp),
+            color: Colors.white,
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: [Color(0xFFFFD700), Colors.amber.shade700],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ).createShader(bounds),
+          child: Text(
+            "Perfume Store",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontFamily: 'PlayfairDisplay',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 2,
+              shadows: [
+                Shadow(
+                  blurRadius: 10,
+                  color: Colors.black26,
+                  offset: Offset(3, 3),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      drawer: MyDrawer(),
       body: Column(
         children: [
           SizedBox(
@@ -25,7 +62,6 @@ class HomeState extends State<Home> {
             width: double.infinity,
             child: Stack(
               children: [
-                // Image in the background
                 Hero(
                   tag: 'backgroundImageHero',
                   child: Image.asset(
@@ -34,7 +70,6 @@ class HomeState extends State<Home> {
                     width: double.infinity,
                   ),
                 ),
-
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(

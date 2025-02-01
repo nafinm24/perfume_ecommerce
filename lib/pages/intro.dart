@@ -22,7 +22,7 @@ class IntroState extends State<Intro> {
         Duration(seconds: 5),
         () => Navigator.of(context).pushReplacement(PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) =>
-                Home(backgroundImage: backgroundImage),
+                HomePage(backgroundImage: backgroundImage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return FadeTransition(
@@ -33,7 +33,7 @@ class IntroState extends State<Intro> {
   }
 
   void getRandomImage() {
-    int images = 7;
+    int images = 8;
     final random = Random();
     int randomIndex = random.nextInt(images) + 1;
     setState(() {
@@ -55,7 +55,7 @@ class IntroState extends State<Intro> {
           ),
           Positioned.fill(
             child: Container(
-              color: Colors.black.withValues(alpha: 0.5),
+              color: Colors.black.withValues(alpha: 0.6),
             ),
           ),
           Center(

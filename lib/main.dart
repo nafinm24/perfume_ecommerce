@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:perfume_ecommerce/pages/cart.dart';
+import 'package:perfume_ecommerce/pages/home.dart';
 import 'package:perfume_ecommerce/pages/intro.dart';
 import 'package:flutter/services.dart';
 
@@ -18,6 +20,13 @@ class MyApp extends StatelessWidget {
       title: 'Perfume Ecommerce',
       debugShowCheckedModeBanner: false,
       home: Intro(),
+      routes: {
+        '/intro': (context) => Intro(),
+        '/home': (context) => HomePage(
+              backgroundImage: '',
+            ),
+        '/cart': (context) => Cart(),
+      },
     );
   }
 }
