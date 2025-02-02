@@ -1,7 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:perfume_ecommerce/models/perfume.dart';
 
-class Cart extends StatelessWidget {
-  const Cart({super.key});
+class Cart extends StatefulWidget {
+  final Perfume? addedPerfume;
+
+  const Cart({super.key, this.addedPerfume});
+
+  @override
+  _CartState createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
+  List<Perfume> cartItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.addedPerfume != null) {
+      cartItems.add(widget.addedPerfume!);
+    }
+  }
+
+  void removeFromCart(Perfume perfume) {
+    setState(() {
+      cartItems.remove(perfume);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +34,7 @@ class Cart extends StatelessWidget {
       appBar: AppBar(
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(
-              Icons.keyboard_double_arrow_left_rounded,
-            ),
+            icon: Icon(Icons.keyboard_double_arrow_left_rounded),
             color: Colors.white,
             onPressed: () {
               Navigator.pop(context);
@@ -46,25 +69,37 @@ class Cart extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: Text(
-          "Cart Page",
-          style: TextStyle(
-            fontSize: 24,
-            fontFamily: 'PlayfairDisplay',
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            letterSpacing: 2,
-            shadows: [
-              Shadow(
-                blurRadius: 10,
-                color: Colors.black26,
-                offset: Offset(3, 3),
+      body: cartItems.isEmpty
+          ? Center(
+              child: Text(
+                "Your Cart is Empty",
+                style: TextStyle(fontSize: 24),
               ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : ListView.builder(
+              itemCount: cartItems.length,
+              itemBuilder: (context, index) {
+                final perfume = cartItems[index];
+                return ListTile(
+                  contentPadding: EdgeInsets.all(8),
+                  leading: Image.asset(
+                    perfume.imagePath,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.contain,
+                  ),
+                  title: Text(perfume.name),
+                  subtitle: Text("\$${perfume.price}"),
+                  trailing: IconButton(
+                    icon: Icon(Icons.remove_shopping_cart),
+                    onPressed: () {
+                      // Remove perfume from the cart
+                      removeFromCart(perfume);
+                    },
+                  ),
+                );
+              },
+            ),
     );
   }
 }

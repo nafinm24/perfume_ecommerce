@@ -12,7 +12,7 @@ class MyDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/landscape_perfume/land2.jpg'),
+                image: AssetImage('assets/landscape_perfume/land3.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

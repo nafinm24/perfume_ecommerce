@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:perfume_ecommerce/pages/my_drawer.dart';
+import 'package:perfume_ecommerce/components/my_drawer.dart';
+import 'package:perfume_ecommerce/components/perfume_box.dart';
+import 'package:perfume_ecommerce/pages/cart.dart';
 
 class HomePage extends StatefulWidget {
   final String backgroundImage;
@@ -26,6 +28,18 @@ class HomePageState extends State<HomePage> {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart_checkout_rounded),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Cart()),
+              );
+            },
+          ),
+        ],
         backgroundColor: Colors.black,
         centerTitle: true,
         title: ShaderMask(
@@ -92,13 +106,17 @@ class HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.black.withValues(alpha: 1.0),
-                    Colors.transparent
+                    Colors.black,
+                    Colors.black,
+                    Colors.amber,
+                    Colors.amber.shade700
                   ],
+                  stops: [0.0, 0.3, 0.7, 1.0],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
               ),
+              child: PerfumeBox(),
             ),
           ),
         ],
